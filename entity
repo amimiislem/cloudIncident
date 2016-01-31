@@ -1,0 +1,89 @@
+nova list
+nova show id_vm
++--------------------------------------+----------------------------------------------------------------+
+| Property                             | Value                                                          |
++--------------------------------------+----------------------------------------------------------------+
+| OS-DCF:diskConfig                    | AUTO                                                           |
+| OS-EXT-AZ:availability_zone          | nova                                                           |
+| OS-EXT-SRV-ATTR:host                 | DevStackOSDomU                                                 |
+| OS-EXT-SRV-ATTR:hypervisor_hostname  | xenserver                                                      |
+| OS-EXT-SRV-ATTR:instance_name        | instance-00000001                                              |
+| OS-EXT-STS:power_state               | 1                                                              |
+| OS-EXT-STS:task_state                | -                                                              |
+| OS-EXT-STS:vm_state                  | active                                                         |
+| OS-SRV-USG:launched_at               | 2015-09-14T23:50:51.000000                                     |
+| OS-SRV-USG:terminated_at             | -                                                              |
+| accessIPv4                           |                                                                |
+| accessIPv6                           |                                                                |
+| config_drive                         |                                                                |
+| created                              | 2015-09-14T23:50:17Z                                           |
+| flavor                               | m1.nano (42)                                                   |
+| hostId                               | 06a2f1638e81f1c18f7215b6cf4e39c847bfd841989baa1b4d018ba3       |
+| id                                   | 30bd83b0-6e2b-4566-b190-1e5671f34ad7                           |
+| image                                | cirros-0.3.2-x86_64-uec (6d9656f2-253c-4d38-942e-c02eff7f87cc) |
+| key_name                             | -                                                              |
+| metadata                             | {}                                                             |
+| name                                 | test_start_ubuntu                                              |
+| os-extended-volumes:volumes_attached | []                                                             |
+| private network                      | 10.0.0.2                                                       |
+| progress                             | 100                                                            |
+| security_groups                      | default                                                        |
+| status                               | ACTIVE                                                         |
+| tenant_id                            | e2388fb4a9af4a7a91350e11eaa40440                               |
+| updated                              | 2015-09-14T23:55:22Z                                           |
+| user_id                              | a4e8497f0ffd47b398cf107c59686770                               |
++--------------------------------------+----------------------------------------------------------------+
+
+nova hypervisor-list
++----+---------------------+-------+---------+
+| ID | Hypervisor hostname | State | Status  |
++----+---------------------+-------+---------+
+| 1  | xenserver           | up    | enabled |
++----+---------------------+-------+---------+
+
+nova hypervisor-show 1
++---------------------------+------------------------------------------+
+| Property                  | Value                                    |
++---------------------------+------------------------------------------+
+| cpu_info_features         | ["fpu", "de", "tsc", "msr", "pae",       |
+|                           | "mce", "cx8", "apic", "sep", "mca",      |
+|                           | "cmov", "pat", "clflush", "mmx", "fxsr", |
+|                           | "sse", "sse2", "ss", "ht", "syscall",    |
+|                           | "nx", "lm", "constant_tsc", "nopl",      |
+|                           | "nonstop_tsc", "pni", "pclmulqdq",       |
+|                           | "vmx", "ssse3", "fma", "cx16", "sse4_1", |
+|                           | "sse4_2", "movbe", "popcnt",             |
+|                           | "tsc_deadline_timer", "aes", "f16c",     |
+|                           | "rdrand", "hypervisor", "lahf_lm",       |
+|                           | "abm", "ida", "arat", "epb", "pln",      |
+|                           | "pts", "dtherm", "tpr_shadow", "vnmi",   |
+|                           | "ept", "vpid", "fsgsbase", "bmi1",       |
+|                           | "avx2", "bmi2"]                          |
+| cpu_info_model            | Intel(R) Core(TM) i7-4720HQ CPU @        |
+|                           | 2.60GHz                                  |
+| cpu_info_topology_cores   | 2                                        |
+| cpu_info_topology_sockets | 2                                        |
+| cpu_info_topology_threads | 1                                        |
+| cpu_info_vendor           | GenuineIntel                             |
+| current_workload          | 0                                        |
+| disk_available_least      | 50                                       |
+| free_disk_gb              | 90                                       |
+| free_ram_mb               | 7610                                     |
+| host_ip                   | 192.168.49.139                           |
+| hypervisor_hostname       | xenserver                                |
+| hypervisor_type           | xen                                      |
+| hypervisor_version        | 6005000                                  |
+| id                        | 1                                        |
+| local_gb                  | 90                                       |
+| local_gb_used             | 0                                        |
+| memory_mb                 | 8191                                     |
+| memory_mb_used            | 581                                      |
+| running_vms               | 1                                        |
+| service_disabled_reason   | None                                     |
+| service_host              | DevStackOSDomU                           |
+| service_id                | 5                                        |
+| state                     | up                                       |
+| status                    | enabled                                  |
+| vcpus                     | 4                                        |
+| vcpus_used                | 1                                        |
++---------------------------+------------------------------------------+
