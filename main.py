@@ -31,14 +31,6 @@ def test_config_data():
     print(data2['AUTH_URI'])
 
 def test_hyp_cmd():
-    '''
-    get ip pass hyperviseur
-    get directory for hyperviseur
-    uplad the script file
-    add chmode +x the the script file
-    execute the file with name of the vm and the directory of save and get the name of the checkpoint
-    download the checkpoint file
-    '''
     config = Config_data()
     x = Cloud_client()
     vms = vm_service(x.get_client())
@@ -51,32 +43,22 @@ def test_hyp_cmd():
     ssh.send_file(hyp_config['LOCAL_SCRIPT'],hyp_config['LOCAL_SCRIPT'])
     data = hyper_service.get_hyp_cmd(hyp)
     vm_hyp_name = vms.get_vm_hyp_name(vms.getvms[0])
-
     d = ''
     output = ''
     for key in data:
-        #d = d+data[key]+';'
         cmd = data[key].replace('[script]',hyp_config['LOCAL_SCRIPT']).replace('[vm_name]',vm_hyp_name)
         ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_cmd(cmd=cmd)
         output = str(ssh_stdout.readlines())[3:-4]
-        if(output <> '' ):
-            ssh.get_file(output,'')
-        print (output)
-        print (ssh_stderr.readlines())
+    if(output <> '' ):
+        getsnapshot(ssh=ssh,filename=output)
+        ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_cmd(cmd="rm -f *.xva xen_snap.sh")
     ssh.ssh_close()
 
-def main2():
-    print ('hello')
-    server_conf = Config_data()
-    data = server_conf.get_hyp_config('xen')
-    print (data['PASS'])
-    ssh = ssh_client(ip=data['IP'], passwd=data['PASS'])
-    ssh_stdin, ssh_stdout, ssh_stderr = ssh.exec_cmd(cmd='ls')
-    print(ssh_stdout.readlines())
-    ssh.get_file(localpath='checkpoint-instance-00000002-29September15.xva',filepath='checkpoint-instance-00000002-29September15.xva')
+def getsnapshot(ssh,filename):
+    ssh.get_file(localpath=filename,filepath='snapshot/'+filename)
 
 if __name__ == '__main__':
-    main2()
+    #main2()
     #test_config_data()
-    #test_hyp_cmd()
+    test_hyp_cmd()
     #hyp()
